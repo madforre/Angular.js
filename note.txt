@@ -1,0 +1,73 @@
+AngularJS 기본 개념
+
+AngularJS를 쉽게 이해하기 위해서 알아두어야 할 기본 개념 5가지
+
+(출처 : http://www.nextree.co.kr/p3241/)
+
+* 클라이언트 사이드에서의 MVC 모델 사용 또는 MVVM 모델 사용.
+
+1. Scope
+
+    Scope는 모델 변경을 감지하고 표현하기위한 책임을 갖는다
+    Scope는 DOM 구조와 가깝게 하이어라키-hierarchy(위계 제도, 조직, 업무지시권한이 상부에 있는 것) 구조를 갖는다
+
+2. Model
+
+    모델은 화면 템플릿에 합쳐지는 '데이터를 가지고 있는 일반 자바스크립트 객체'이다. (데이터라고 생각하면 된다.)   
+    Scope는 항상 모델을 참조하고 있다.
+
+3. View
+
+    템플릿 스트링과 모델을 합쳐서 HTML을 만들고 DOM으로 해석되어 Browser에 표현된다.
+    Angular는 템플릿이 HTML이어서 바로 DOM으로 해석되고 DOM안에 directive가 
+    템플릿 엔진인 $compile지시어를 통해 $watch를 설정하고 모델의 변경을 계속 감시하게 된다.
+
+    View는 템플릿으로 Scope의 투영체이고, Scope는 Model과 View의 연결하며 controller로 이벤트를 보내는 역할을 한다.
+
+4. Controller
+
+Controller는 View뒤에서 반드시 수행하는 코드이다.
+Controller 역할은 모델을 생성하고 콜백 메소드를 가지고 View로 퍼블리싱을 담당한다 .
+Controller 는 자바스크립트이고 업무적 행위를 정의한다. 또한 DOM rendering 정보가 일체 없다 .
+5. Directives (지시어)
+
+지시어는 HTML 을 확장하여 주고 행위를 일으키는 주체이다 .
+예를들어 앞의 예제에서 보았듯이 데이터 바인딩을 위한 이중 중괄호 표기{{}}, 컨트롤러가 뷰의 어느 부분을 감독할지를 지정하는 ng-controller, 인풋을 해당 모델의 구성물에 바인딩하는 ng-model 모두 Directive를 이용한 확장 문법이다.
+
+
+-----------------------------------------------
+
+AngularJS 적용
+
+    정적인 페이지인 index.html에 AngularJS를 적용하기 위해서는 AngularJS에서 제공하는 특별한 속성을 사용해야 한다. 바로 ng-app 이다. AngularJS를 적용하고자 하는 최상위 DOM 노드에 속성으로 ng-app을 작성한다.
+
+    이렇게 ng-app을 작성하였으면 해당 HTML문서를 템플릿으로서 작성을 할 수 있다. 
+
+
+AngularJS의 가장 핵심은 양방향 데이터바인딩이다.
+
+------------------------
+
+설정 예시
+
+var myApp = angular.module('myApp', []);
+
+myApp.controller('UserCtrl', ['$scope', function ($scope) {
+    
+    // Let's namespace the user details
+    // Also great for DOM visual aids too
+    $scope.user = {};
+    $scope.user.details = {
+      "username": "Todd Motto",
+      "id": "89101112"
+    };
+    
+}]);
+
+컨트롤러는 데이터 전용이며 서버와 통신하고 JSON 데이터를 푸시 / 풀하는 함수 (이벤트 함수도!)를 작성 한다는 점을 기억해야 합니다. 
+여기서는 DOM 조작을해서는 안되므로 jQuery 툴킷을 멀리 두십시오. 지시어는 DOM 조작을위한 것이며 다음 단계입니다.
+
+----------------------
+
+Ionic vs React Native 
+
